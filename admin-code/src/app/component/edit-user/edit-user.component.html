@@ -1,0 +1,126 @@
+<div class="main-content page-m">
+    <nav class="sb-topnav ">
+        <button (click)="logout()" class="btn btn-lg" style="float: right; color: white;">
+            Выйти</button>
+    </nav>
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" routerLink="/admin/user" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Пользователь
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-type" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Тип кредита
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Запрос на кредит
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request-history" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        История запросов на кредит
+                    </a>
+
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Вы вошли как :</div>
+                {{username}}
+            </div>
+        </nav>
+    </div>
+
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+
+            <h3 style="text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+                Пользователь</h3><br>
+            <div class="row">
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px #bbbbbb;">
+                    <div class="col-md-2"><label>Имя пользователя </label></div>
+                    <div class="col-md-9">
+                        <div class="text-monospace">
+                            <p>{{user.username}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Роль пользователя</label></div>
+                    <div class="col-md-9">
+                        <div class="text-monospace">
+                            <p>{{user.userRole}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Дата создания</label></div>
+                    <div class="col-md-9">
+                        <div class="text-monospace">
+                            <p>{{user.createdDate|date}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>
+                        Дата обновления</label></div>
+                    <div class="col-md-9">
+                        <div class="text-monospace">
+                            <p>{{user.updatedDate|date}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Филиал</label></div>
+                    <div class="col-md-9">
+                        <div class="text-monospace">
+                            <p>{{user.branch.branchName}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Статyс</label></div>
+                    <div class="col-md-9" *ngIf="superAdmin;else notSuperAdmin">
+                        <p class="text-info">
+                            Активный</p>
+                    </div>
+                    <ng-template #notSuperAdmin> <input type="checkbox" [(ngModel)]="user.status">Актив
+                    </ng-template>
+                </div>
+
+                <div class="text-left" style="margin: 10px;" *ngIf="superAdmin;else notSA">
+                    <button class="btn btn-dark btn-outline-primary" routerLink="admin/loan-request"><i>Назад</i></button>&nbsp;&nbsp;
+
+                </div>
+                <ng-template #notSA>
+                    <div class="text-left" style="margin: 10px;">
+                        <button class="btn btn-dark btn-outline-primary" routerLink="admin/loan-request"><i>Назад</i></button>&nbsp;&nbsp;
+                        <button class="btn btn-dark btn-outline-primary" (click)="edit(user.id)"><i>Изменить</i></button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>

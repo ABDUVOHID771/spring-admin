@@ -1,0 +1,146 @@
+<div class="main-content page-m">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" routerLink="/admin/user" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Пользователь
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-type" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+
+                        Тип кредита
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+
+                        Запрос на кредит
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request-history" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        История запросов на кредит
+                    </a>
+
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Вы вошли как :</div>
+                {{username}}
+            </div>
+        </nav>
+    </div>
+    <nav class="sb-topnav ">
+        <button (click)="logout()" class="btn btn-lg" style="float: right; color: white;">
+            Выйти</button>
+    </nav>
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+
+            <h3 style="text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; ">Запросы на кредит</h3><br>
+            <div class="row ">
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>Телефон пользователя</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.userRequest.phone}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        Тип кредита</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.loanType.name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        Дата создания</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.createdDate|date}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        Дата обновления</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.updatedDate|date}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        Карта БИН</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.salaryCardBin}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        ТИН</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.TIN}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        Стратегия подсчета</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.countingStrategy}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>
+                        Название филиала</label></div>
+                    <div class="col-md-9 ">
+                        <div class="text-monospace ">
+                            <p>{{loanRequest.branch.branchName}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid " style="background-color: #eeeeee; padding: 4px; margin: 0; box-shadow: 1px 1px 2px black; ">
+                    <div class="col-md-2 "><label>Статyс</label></div>
+                    <div class="col-md-9 ">
+                        <div class="input-space ">
+                            <label *ngFor="let status of statusValues ">
+                                    <input type="checkbox" [value]="status" [(ngModel)]="loanRequest.status">&nbsp;{{status}}&nbsp;
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <hr> &nbsp;
+                    <a href="http://192.168.70.64:9986/img/gets?url={{urlBack}}">
+                        <img [src]="imageToBack" width="200px" height="200px" style="border-radius: 20%;"> &nbsp;</a>
+                    <a href="http://192.168.70.64:9986/img/gets?url={{urlFront}}">
+                        <img [src]="imageToFront" style="border-radius: 20%;" width="200px" height="200px"> &nbsp;</a>
+                    <a href="http://192.168.70.64:9986/img/gets?url={{urlSelfie}}">
+                        <img [src]="imageToSelfie" style="border-radius: 20%;" width="200px" height="200px" class="loader">
+                    </a>
+                </div>
+
+            </div>
+            <div class="text-left " style="margin: 10px; ">
+                <button class="btn btn-dark btn-outline-primary " routerLink="admin/loan-request "><i>Назад</i></button>&nbsp;&nbsp;
+                <button class="btn btn-dark btn-outline-primary " (click)="edit(loanRequest.id) "><i>Изменить</i></button>
+            </div>
+        </div>
+    </div>
+</div>

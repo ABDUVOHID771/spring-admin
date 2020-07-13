@@ -1,0 +1,91 @@
+<main>
+    <nav class="sb-topnav ">
+        <button (click)="logout()" class="btn btn-lg" style="float: right; color: white;">
+            Выйти</button>
+    </nav>
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" routerLink="/admin/user" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Пользователь
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-type" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Тип кредита
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Запрос на кредит
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request-history" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        История запросов на кредит
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Вы вошли как :</div>
+                {{username}}
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <h1 class="mt-4">Таблицы</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a routerLink="admin/loan-request">Панель</a></li>
+            <li class="breadcrumb-item active">Запрос на кредит</li>
+        </ol>
+        <br>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i> Список запросов на кредит
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="dataTable " width="100% " cellspacing="0 ">
+                        <thead>
+                            <tr>
+                                <th>Пользователь</th>
+                                <th>Статyс</th>
+                                <th>
+                                    Мин сумма</th>
+                                <th>Макс сумма</th>
+                                <th>
+                                    Мин месяц</th>
+                                <th>
+                                    Макс месяц</th>
+                                <th>Дифференциальные </th>
+                                <th>
+                                    Аннуитет</th>
+                                <th>Оплата</th>
+                                <th>
+                                    Страхование</th>
+                                <th>
+
+                                    Страховая цена</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let loan of loanTypes " (click)="updateLoanType(loan.id) ">
+                                <td>{{loan.name}}</td>
+                                <td>{{loan.status}}</td>
+                                <td>{{loan.minAmount}}</td>
+                                <td>{{loan.maxAmount}}</td>
+                                <td>{{loan.minMonth}}</td>
+                                <td>{{loan.maxMonth}}</td>
+                                <td>{{loan.differential}}</td>
+                                <td>{{loan.annuitet}}</td>
+                                <td>{{loan.cardPayment}}</td>
+                                <td>{{loan.insurance}}</td>
+                                <td>{{loan.insurancePrice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

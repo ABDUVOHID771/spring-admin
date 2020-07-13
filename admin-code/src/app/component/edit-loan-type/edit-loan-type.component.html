@@ -1,0 +1,174 @@
+<div class="main-content page-m">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" routerLink="/admin/user" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Пользователь
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-type" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Тип кредита
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Запрос на кредит
+                    </a>
+                    <a class="nav-link" routerLink="/admin/loan-request-history" *ngIf="isRoleSuperAdmin">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        История запросов на кредит
+                    </a>
+
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">
+                    Вы вошли как : </div>
+                {{username}}
+            </div>
+        </nav>
+    </div>
+    <nav class="sb-topnav ">
+        <button (click)="logout()" class="btn btn-lg" style="float: right; color: white;">
+            Выйти</button>
+    </nav>
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+
+            <h3 style="text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+                Тип кредита</h3><br>
+            <div class="row">
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Имя</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.name" placeholder="{{loanType.name}}" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+
+                    <div class="col-md-2"><label>Мин сумма</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.minAmount" type="text" placeholder="{{loanType.minAmount}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>
+                        Макс Сумма</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.maxAmount" type="text" placeholder="{{loanType.maxAmount}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>
+                        Мин месяц</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.minMonth" type="number" placeholder="{{loanType.minMonth}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Макс месяц</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.maxMonth" type="number" placeholder="{{loanType.maxMonth}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>
+                        Annuitet</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input type="checkbox" [(ngModel)]="loanType.annuitet"> Проверьте
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Дифференциальный </label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input type="checkbox" [(ngModel)]="loanType.differential"> Проверьте </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Страхование</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.insurance" type="text" placeholder="{{loanType.insurance}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Страховая цена</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.insurancePrice" type="number" placeholder="{{loanType.insurancePrice}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>
+                        Оплата картой</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [(ngModel)]="loanType.cardPayment" type="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid" style="background-color: #eeeeee;
+                padding: 4px;
+                margin: 0;
+                box-shadow: 1px 1px 2px black;">
+                    <div class="col-md-2"><label>Статyс</label></div>
+                    <div class="col-md-9">
+                        <input type="checkbox" [(ngModel)]="loanType.status"> Активные
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-center">
+                <button class="btn btn-dark btn-outline-primary" routerLink="admin/loan-request"><i>Назад</i></button>&nbsp;&nbsp;
+                <button class="btn btn-dark btn-outline-primary" style="margin: 10px;" (click)="edit(loanType.id)"><i>Изменить</i></button>
+            </div>
+        </div>
+    </div>
+</div>

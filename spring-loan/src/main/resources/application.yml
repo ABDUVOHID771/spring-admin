@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-app
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring-loan?useSSL=false&useUnicode=yes
+    username: root
+    password: Aristo070
+    driver-class-name: com.mysql.cj.jdbc.Driver
